@@ -13,13 +13,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.ArrayList;
 
 public class LoginAdapter extends FragmentStateAdapter {
-//    private Context context;
-//    int totalTabs;
+
 ArrayList<String> Strings;
     public LoginAdapter(FragmentActivity fa) {
         super(fa);
-//        this.context=context;
-//        this.totalTabs=totalTabs;
     }
 
     @Override
