@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.4.1'
     implementation 'com.shaishavgandhi:login-buttons:1.0.0'
     implementation 'com.mikhaellopez:circularimageview:4.3.0'
-    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
+    implementation 'com.google.firebase:firebase-database'
 }

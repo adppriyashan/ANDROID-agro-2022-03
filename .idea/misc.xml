@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/drawable/login_gradient.xml" value="0.1945" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/drawable/rounded_white.xml" value="0.1945" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/drawable/top_rounded_white.xml" value="0.1945" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/drawable/vertical_gradient.xml" value="0.1945" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/font/normal.xml" value="0.234375" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/font/primary.xml" value="0.234375" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/layout/activity_dashboard.xml" value="0.22" />
+        <entry key="..\:/Users/Pasindu/Documents/DEVELOPMENTS/ANDROID-agro-2022-03/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/Pasindu/Documents/Developments/ANDROID-agro-2022-03/app/src/main/res/drawable/btn_design.xml" value="0.17" />
         <entry key="..\:/Users/Pasindu/Documents/Developments/ANDROID-agro-2022-03/app/src/main/res/drawable/button_bg.xml" value="0.121" />
         <entry key="..\:/Users/Pasindu/Documents/Developments/ANDROID-agro-2022-03/app/src/main/res/drawable/edittext_bg.xml" value="0.17" />

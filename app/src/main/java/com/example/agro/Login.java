@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.agro.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,6 +26,11 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -34,7 +41,7 @@ import java.util.List;
 
 public class Login extends AppCompatActivity  implements Validator.ValidationListener {
 
-    TextView forget;
+    TextView forget,loginGoRegister;
 
     @NotEmpty
     @Email
@@ -50,14 +57,39 @@ public class Login extends AppCompatActivity  implements Validator.ValidationLis
 
     private FirebaseAuth mAuth;
 
+    private DatabaseReference mDatabase;
+
+    ProgressDialog loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        initProcess();
+    }
+
+    private void initProcess() {
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
         forget = findViewById(R.id.login_recover_password);
+
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this,RecoverForgetPassword.class));
+            }
+        });
+
+        loginGoRegister=findViewById(R.id.loginGoRegister);
+
+        loginGoRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this,Signup.class));
+            }
+        });
+
         login = findViewById(R.id.login_button);
 
         validator = new Validator(this);
@@ -70,29 +102,49 @@ public class Login extends AppCompatActivity  implements Validator.ValidationLis
                 validator.validate();
             }
         });
+
+        loading = new ProgressDialog(Login.this);
+        loading.setMessage("Loading..");
+        loading.setTitle("Please wait, Login in progress.");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        email.setText("bata@gmail.com");
+        password.setText("Aries@123");
     }
 
     @Override
     public void onValidationSucceeded() {
         try {
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && currentUser == null){
-                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    CustomUtils.loggedUser = mAuth.getCurrentUser();
-                                    startActivity(new Intent(Login.this,Dashboard.class));
-                                } else {
-                                    Toast.makeText(Login.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+            loading.show();
+            mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            loading.hide();
+                            if (task.isSuccessful()) {
+                                CustomUtils.loggedUser = mAuth.getCurrentUser();
+
+                                mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        CustomUtils.userData=snapshot.getValue(User.class);
+                                        startActivity(new Intent(Login.this,Dashboard.class));
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+
+                            } else {
+                                Toast.makeText(Login.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
                             }
-                        });
-            }else{
-                Toast.makeText(Login.this, "Something wrong, Please restart the app.", Toast.LENGTH_SHORT).show();
-            }
+                        }
+                    });
         }catch(Exception ex){
             Toast.makeText(Login.this, "Something wrong", Toast.LENGTH_SHORT).show();
         }
