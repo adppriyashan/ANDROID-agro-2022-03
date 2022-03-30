@@ -128,6 +128,7 @@ public class Login extends AppCompatActivity  implements Validator.ValidationLis
                                 mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        System.out.println("Gettting user data");
                                         CustomUtils.userData=snapshot.getValue(User.class);
                                         startActivity(new Intent(Login.this,Dashboard.class));
                                     }
