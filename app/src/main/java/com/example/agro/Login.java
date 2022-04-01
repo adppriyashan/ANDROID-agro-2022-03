@@ -105,7 +105,7 @@ public class Login extends AppCompatActivity  implements Validator.ValidationLis
 
         loading = new ProgressDialog(Login.this);
         loading.setMessage("Loading..");
-        loading.setTitle("Please wait, Login in progress.");
+        loading.setTitle("Please wait");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 

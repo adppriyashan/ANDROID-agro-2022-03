@@ -112,7 +112,7 @@ public class Dashboard extends AppCompatActivity {
                                 if(snapshot.exists()){
                                     Toast.makeText(Dashboard.this, "Device already paired with another user.", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    Device device=new Device(result,CustomUtils.loggedUser.getUid());
+                                    Device device=new Device(result,CustomUtils.loggedUser.getUid(),2);
                                     String newDeviceKey=mDatabase.child("devices").push().getKey();
                                     mDatabase.child("devices").child(newDeviceKey).setValue(device);
                                     mDatabase.child("users").child(device.user).child("devices").child(newDeviceKey).setValue(device);
