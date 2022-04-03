@@ -47,14 +47,11 @@ public class Dashboard extends AppCompatActivity {
 
     private void initProcess() {
         dashboardName=findViewById(R.id.dashboardName);
-//        dashboardName.setText((CustomUtils.userData.name.length()>10)?CustomUtils.userData.name:CustomUtils.userData.name.substring(0,10)+"..");
-
-        System.out.println(CustomUtils.userData.name);
+        dashboardName.setText((CustomUtils.userData.name.length()>10)?CustomUtils.userData.name:CustomUtils.userData.name.substring(0,10)+"..");
 
         dashboardImage=findViewById(R.id.dashboardImage);
         dashboardTime=findViewById(R.id.dashboardTime);
         dashboardTime.setText(java.text.DateFormat.getDateTimeInstance().format(new Date()));
-        dashboardDate=findViewById(R.id.dashboardDate);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         dashboardQrCodeLayout=findViewById(R.id.dashboardQrCodeLayout);

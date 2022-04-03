@@ -2,6 +2,7 @@ package com.example.agro;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.agro.Adapters.DeviceListAdapter;
 import com.example.agro.Models.Device;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,18 +51,20 @@ public class Devices extends AppCompatActivity {
 
         deviceList=findViewById(R.id.deviceList);
         deviceDataList=new ArrayList<>();
-        mDatabase.child(CustomUtils.loggedUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("users").child(CustomUtils.loggedUser.getUid()).child("devices").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 System.out.println(snapshot.getValue());
                 for(DataSnapshot device:snapshot.getChildren()){
-
                     Device deviceTemp=device.getValue(Device.class);
                     deviceTemp.id=device.getKey();
                     deviceDataList.add(deviceTemp);
                 }
 
-                System.out.println(deviceDataList.size());
+                DeviceListAdapter adapter = new DeviceListAdapter(Devices.this,deviceDataList);
+                deviceList.setHasFixedSize(true);
+                deviceList.setLayoutManager(new LinearLayoutManager(Devices.this));
+                deviceList.setAdapter(adapter);
             }
 
             @Override

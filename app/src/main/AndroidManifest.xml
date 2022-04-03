@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Agro">
         <activity
+            android:name=".device_history_record"
+            android:exported="false" />
+        <activity
+            android:name=".DeviceHistory"
+            android:exported="false" />
+        <activity
+            android:name=".DeviceRecord"
+            android:exported="false" />
+        <activity
             android:name=".Devices"
             android:exported="false" />
         <activity

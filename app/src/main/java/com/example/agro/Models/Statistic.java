@@ -2,19 +2,21 @@ package com.example.agro.Models;
 
 public class Statistic {
     public String id;
+    public long date;
     public double ts,hs,sms;
     public int gss, rs, fs;
 
-    public Statistic(double ts, double hs, double sms, int gss, int rs, int fs) {
+    public Statistic(double ts, double hs, double sms, int gss, int rs, int fs,long date) {
         this.ts = ts;
         this.hs = hs;
         this.sms = sms;
         this.gss = gss;
         this.rs = rs;
         this.fs = fs;
+        this.date=date;
     }
 
-    public Statistic(String id, double ts, double hs, double sms, int gss, int rs, int fs) {
+    public Statistic(String id, double ts, double hs, double sms, int gss, int rs, int fs,long date) {
         this.id = id;
         this.ts = ts;
         this.hs = hs;
@@ -22,6 +24,7 @@ public class Statistic {
         this.gss = gss;
         this.rs = rs;
         this.fs = fs;
+        this.date=date;
     }
 
     public Statistic() {
@@ -81,5 +84,13 @@ public class Statistic {
 
     public void setFs(int fs) {
         this.fs = fs;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }
