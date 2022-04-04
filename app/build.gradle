@@ -48,4 +48,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
     implementation 'com.google.firebase:firebase-database'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

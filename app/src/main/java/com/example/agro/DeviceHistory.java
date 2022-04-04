@@ -101,8 +101,6 @@ public class DeviceHistory extends AppCompatActivity {
     }
 
     private void dataFetchProcess(boolean useFilters) {
-
-
         dataList.clear();
         mDatabase.child("users").child(CustomUtils.loggedUser.getUid()).child("devices").child(deviceId).child("statistics").orderByChild("date").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

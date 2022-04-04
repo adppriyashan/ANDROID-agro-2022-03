@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Agro">
         <activity
+            android:name=".DeviceStatistics"
+            android:exported="false" />
+        <activity
             android:name=".device_history_record"
             android:exported="false" />
         <activity

@@ -47,7 +47,7 @@ public class Dashboard extends AppCompatActivity {
 
     private void initProcess() {
         dashboardName=findViewById(R.id.dashboardName);
-        dashboardName.setText((CustomUtils.userData.name.length()>10)?CustomUtils.userData.name:CustomUtils.userData.name.substring(0,10)+"..");
+        dashboardName.setText("Halo, "+((CustomUtils.userData.name.length()<10)?CustomUtils.userData.name:CustomUtils.userData.name.substring(0,10)+".."));
 
         dashboardImage=findViewById(R.id.dashboardImage);
         dashboardTime=findViewById(R.id.dashboardTime);
@@ -77,6 +77,14 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Dashboard.this,Devices.class));
+            }
+        });
+
+        dashboardStatisticsLayout=findViewById(R.id.dashboardStatisticsLayout);
+        dashboardStatisticsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Dashboard.this,DeviceStatistics.class));
             }
         });
 

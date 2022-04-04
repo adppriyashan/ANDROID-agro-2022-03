@@ -125,12 +125,14 @@ public class Login extends AppCompatActivity  implements Validator.ValidationLis
                             if (task.isSuccessful()) {
                                 CustomUtils.loggedUser = mAuth.getCurrentUser();
 
-                                mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                mDatabase.child("users").child(CustomUtils.loggedUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         System.out.println("Gettting user data");
                                         CustomUtils.userData=snapshot.getValue(User.class);
-                                        startActivity(new Intent(Login.this,Dashboard.class));
+                                        if(CustomUtils.userData!=null){
+                                            startActivity(new Intent(Login.this,Dashboard.class));
+                                        }
                                     }
 
                                     @Override
