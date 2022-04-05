@@ -114,6 +114,11 @@ public class Login extends AppCompatActivity  implements Validator.ValidationLis
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     public void onValidationSucceeded() {
         try {
             loading.show();

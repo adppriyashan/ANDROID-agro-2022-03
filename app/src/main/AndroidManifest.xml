@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Agro">
         <activity
+            android:name=".DeviceSchedule"
+            android:exported="false" />
+        <activity
+            android:name=".DeviceLive"
+            android:exported="false" />
+        <activity
             android:name=".DeviceStatistics"
             android:exported="false" />
         <activity

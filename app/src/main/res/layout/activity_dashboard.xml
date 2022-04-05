@@ -145,7 +145,7 @@
             android:background="@drawable/shadow_effect"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/dashboardScheduleLayout"
+            app:layout_constraintBottom_toTopOf="@+id/dashboardLogoutLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/dashboardDevicesLayout"
             app:layout_constraintTop_toTopOf="parent">
@@ -187,7 +187,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dashboardScheduleLayout"
+            app:layout_constraintEnd_toStartOf="@+id/dashboardLogoutLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dashboardDevicesLayout">
 
@@ -219,7 +219,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dashboardScheduleLayout"
+            android:id="@+id/dashboardLogoutLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -237,8 +237,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="SCHEDULE"
                 android:fontFamily="@font/opensans_semibold"
+                android:text="LOGOUT"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -256,7 +256,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/dashboard_schedule" />
+                app:srcCompat="@drawable/exit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

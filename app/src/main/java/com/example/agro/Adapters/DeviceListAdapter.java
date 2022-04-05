@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agro.DeviceHistory;
+import com.example.agro.DeviceLive;
+import com.example.agro.DeviceSchedule;
 import com.example.agro.Models.Device;
 import com.example.agro.R;
 
@@ -30,6 +33,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView deviceRecordTitle,deviceRecordSubTitle,deviceRecordStatus;
         public ConstraintLayout deviceRecordStatusColor,deviceRecord;
+        public ImageView liveView,historyRecords,deviceRecordLive;
         public ViewHolder(View view) {
             super(view);
             deviceRecordTitle =  view.findViewById(R.id.deviceRecordTitle);
@@ -37,6 +41,9 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
             deviceRecordStatus =  view.findViewById(R.id.deviceRecordStatus);
             deviceRecordStatusColor =  view.findViewById(R.id.deviceRecordStasusColor);
             deviceRecord = view.findViewById(R.id.deviceRecordLayour);
+            liveView=view.findViewById(R.id.deviceRecordLive);
+            historyRecords=view.findViewById(R.id.deviceRecordHistory);
+            deviceRecordLive=view.findViewById(R.id.deviceRecordLive);
         }
     }
 
@@ -56,10 +63,23 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
         holder.deviceRecordSubTitle.setText(device.code);
         holder.deviceRecordStatus.setText((device.status==1)?"ACTIVE":"INACTIVE");
         holder.deviceRecordStatusColor.setBackground((device.status==1)? context.getDrawable(R.drawable.green_status)  :context.getDrawable(R.drawable.red_status));
-        holder.deviceRecord.setOnClickListener(new View.OnClickListener() {
+        holder.historyRecords.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, DeviceHistory.class).putExtra("device", device.id ));
+            }
+        });
+
+        holder.liveView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, DeviceLive.class).putExtra("device", device.id ).putExtra("status", device.status  ));
+            }
+        });
+        holder.deviceRecordLive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, DeviceSchedule.class).putExtra("device", device.id ));
             }
         });
     }

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.agro.Models.Device;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,15 +28,15 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Date;
-import java.util.Map;
 
 public class Dashboard extends AppCompatActivity {
 
-    private ConstraintLayout dashboardQrCodeLayout,dashboardDevicesLayout,dashboardStatisticsLayout,dashboardScheduleLayout;
+    private ConstraintLayout dashboardQrCodeLayout,dashboardDevicesLayout,dashboardStatisticsLayout,dashboardLogoutLayout;
     IntentIntegrator intentIntegrator;
     ImageView dashboardImage;
     TextView dashboardName,dashboardTime,dashboardDate;
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class Dashboard extends AppCompatActivity {
     private void initProcess() {
         dashboardName=findViewById(R.id.dashboardName);
         dashboardName.setText("Halo, "+((CustomUtils.userData.name.length()<10)?CustomUtils.userData.name:CustomUtils.userData.name.substring(0,10)+".."));
-
+        mAuth = FirebaseAuth.getInstance();
         dashboardImage=findViewById(R.id.dashboardImage);
         dashboardTime=findViewById(R.id.dashboardTime);
         dashboardTime.setText(java.text.DateFormat.getDateTimeInstance().format(new Date()));
@@ -89,7 +90,15 @@ public class Dashboard extends AppCompatActivity {
         });
 
         dashboardStatisticsLayout=findViewById(R.id.dashboardStatisticsLayout);
-        dashboardScheduleLayout=findViewById(R.id.dashboardScheduleLayout);
+        dashboardLogoutLayout=findViewById(R.id.dashboardLogoutLayout);
+
+        dashboardLogoutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                startActivity(new Intent(Dashboard.this,Login.class));
+            }
+        });
     }
 
     private void startPairingProcess() {
