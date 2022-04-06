@@ -33,7 +33,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView deviceRecordTitle,deviceRecordSubTitle,deviceRecordStatus;
         public ConstraintLayout deviceRecordStatusColor,deviceRecord;
-        public ImageView liveView,historyRecords,deviceRecordLive;
+        public ImageView liveView,historyRecords,deviceRecordSchedule;
         public ViewHolder(View view) {
             super(view);
             deviceRecordTitle =  view.findViewById(R.id.deviceRecordTitle);
@@ -43,7 +43,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
             deviceRecord = view.findViewById(R.id.deviceRecordLayour);
             liveView=view.findViewById(R.id.deviceRecordLive);
             historyRecords=view.findViewById(R.id.deviceRecordHistory);
-            deviceRecordLive=view.findViewById(R.id.deviceRecordLive);
+            deviceRecordSchedule=view.findViewById(R.id.deviceRecordSchedule);
         }
     }
 
@@ -76,7 +76,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
                 context.startActivity(new Intent(context, DeviceLive.class).putExtra("device", device.id ).putExtra("status", device.status  ));
             }
         });
-        holder.deviceRecordLive.setOnClickListener(new View.OnClickListener() {
+        holder.deviceRecordSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, DeviceSchedule.class).putExtra("device", device.id ));

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.agro.Models.Device;
+import com.example.agro.Services.Emergency;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,6 +48,9 @@ public class Dashboard extends AppCompatActivity {
     }
 
     private void initProcess() {
+
+        startService(new Intent(this, Emergency.class));
+
         dashboardName=findViewById(R.id.dashboardName);
         dashboardName.setText("Halo, "+((CustomUtils.userData.name.length()<10)?CustomUtils.userData.name:CustomUtils.userData.name.substring(0,10)+".."));
         mAuth = FirebaseAuth.getInstance();

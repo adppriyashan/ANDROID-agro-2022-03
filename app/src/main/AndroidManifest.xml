@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Agro">
         <activity
+            android:name=".DeviceScheduleRecord"
+            android:exported="false" />
+        <activity
             android:name=".DeviceSchedule"
             android:exported="false" />
         <activity
@@ -49,6 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:enabled="true" android:name=".Services.Emergency"></service>
     </application>
 
 </manifest>
