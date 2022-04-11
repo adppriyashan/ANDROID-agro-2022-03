@@ -111,7 +111,7 @@ public class DeviceHistory extends AppCompatActivity {
                         Statistic statistic=stat.getValue(Statistic.class);
                         statistic.id=stat.getKey();
                         try {
-                            if(start.before(simpleDateFormat.parse(simpleDateFormat.format(new Date(statistic.getDate())))) && end.after(simpleDateFormat.parse(simpleDateFormat.format(new Date(statistic.getDate()))))){
+                            if(start.before(simpleDateFormat.parse(simpleDateFormat.format(new Date(Long.parseLong(statistic.getDate()))))) && end.after(simpleDateFormat.parse(simpleDateFormat.format(new Date(Long.parseLong(statistic.getDate())))))){
                                 System.out.println("Added");
                                 dataList.add(statistic);
                             }

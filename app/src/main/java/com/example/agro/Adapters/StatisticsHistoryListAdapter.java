@@ -58,7 +58,7 @@ public class StatisticsHistoryListAdapter extends RecyclerView.Adapter<Statistic
     public void onBindViewHolder(@NonNull StatisticsHistoryListAdapter.ViewHolder holder, int position) {
         Statistic statistic = dataList.get(position);
 
-        holder.deviceHistoryDate.setText(new SimpleDateFormat("yyyy/mm/dd").format(new Date(statistic.getDate())));
+        holder.deviceHistoryDate.setText(new SimpleDateFormat("yyyy/mm/dd").format(new Date(Long.parseLong(statistic.getDate()))));
         holder.deviceHistoryTemp.setText(statistic.getTs()+"");
         holder.deviceHistoryHumidity.setText(statistic.getHs()+"%");
         holder.deviceHistoryMoisture.setText(statistic.getSms()+"%");

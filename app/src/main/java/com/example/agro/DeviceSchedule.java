@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.agro.Adapters.ScheduleListAdapter;
 import com.example.agro.Adapters.StatisticsHistoryListAdapter;
@@ -48,6 +49,8 @@ public class DeviceSchedule extends AppCompatActivity {
     private ImageView deviceScheduleBack;
 
     public static String selectedDate1,selectedDate2;
+
+    public int datakey=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +103,16 @@ public class DeviceSchedule extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    mDatabase.child("users").child(CustomUtils.loggedUser.getUid()).child("devices").child(deviceId).child("schedules").push().setValue(new Schedule(simpleDateFormat.parse(selectedDate1).getTime(),simpleDateFormat.parse(selectedDate2).getTime()));
-                    selectedDate1=null;
-                    selectedDate2=null;
-                    deviceScheduleStart.setText("");
-                    deviceScheduleEnd.setText("");
+                    System.out.println(datakey);
+                    if(datakey<5){
+                        mDatabase.child("users").child(CustomUtils.loggedUser.getUid()).child("devices").child(deviceId).child("schedules").push().setValue(new Schedule(simpleDateFormat.parse(selectedDate1).getTime(),simpleDateFormat.parse(selectedDate2).getTime()));
+                        selectedDate1=null;
+                        selectedDate2=null;
+                        deviceScheduleStart.setText("");
+                        deviceScheduleEnd.setText("");
+                    }else{
+                        Toast.makeText(DeviceSchedule.this, "Maximum schedule count limited to five records", Toast.LENGTH_SHORT).show();
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -116,11 +124,12 @@ public class DeviceSchedule extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 dataList.clear();
-
+                datakey=0;
                 for(DataSnapshot schedule:snapshot.getChildren()){
                     Schedule scheduleRecord=schedule.getValue(Schedule.class);
                     scheduleRecord.id=schedule.getKey();
                     dataList.add(scheduleRecord);
+                    datakey++;
                 }
 
                 ScheduleListAdapter adapter = new ScheduleListAdapter(DeviceSchedule.this,dataList,mDatabase,deviceId);

@@ -164,7 +164,7 @@ public class DeviceStatistics extends AppCompatActivity implements AdapterView.O
                         Statistic statistic=stat.getValue(Statistic.class);
                         statistic.id=stat.getKey();
                         try {
-                            if(start.before(simpleDateFormat.parse(simpleDateFormat.format(new Date(statistic.getDate())))) && end.after(simpleDateFormat.parse(simpleDateFormat.format(new Date(statistic.getDate()))))){
+                            if(start.before(simpleDateFormat.parse(simpleDateFormat.format(new Date(Long.parseLong(statistic.getDate()))))) && end.after(simpleDateFormat.parse(simpleDateFormat.format(new Date(Long.parseLong(statistic.getDate())))))){
                                 float recordValue=0;
                                 switch (selectedFactor){
                                     case 1:recordValue=Float.parseFloat(statistic.getTs()+"");
